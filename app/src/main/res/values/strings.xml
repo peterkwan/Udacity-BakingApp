@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Baking App</string>
+    <string name="recipe">Recipe</string>
+    <string name="ingredients">Ingredients</string>
+    <string name="close">Close</string>
+    <string name="load_data_error_title">Error Loading Data</string>
+    <string name="load_data_error_message">Failed to load data from the database/network. Please try again later.</string>
+    <string name="ingredient_format">%s %s %s</string>
+    <string name="method">Method</string>
+    <string name="recipe_step_intro_format">%d. %s</string>
+    <string name="recipe_step_format">Step %d</string>
+    <string name="next_step">Next Step</string>
+    <string name="previous_step">Previous Step</string>
+    <string name="making_of_recipe">Making of %s</string>
+    <string name="play_video_error_message">Error playing video</string>
+    <string name="no_video_error_message">No video available</string>
+    <string name="select_recipe">Select Baking Recipe</string>
+</resources>

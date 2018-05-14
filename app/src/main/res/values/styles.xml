@@ -1,0 +1,145 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:colorBackground">@color/orange_100</item>
+    </style>
+
+    <style name="RecipeListViewStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:scrollbars">vertical</item>
+        <item name="android:paddingTop">@dimen/grid_view_vertical_padding</item>
+        <item name="android:paddingBottom">@dimen/grid_view_vertical_padding</item>
+    </style>
+
+    <style name="RecipeImageViewStyle">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_margin">@dimen/grid_item_spacing</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:adjustViewBounds">true</item>
+        <item name="android:scaleType">fitStart</item>
+    </style>
+
+    <style name="RecipeItemFooterStyle">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">@dimen/grid_item_footer_height</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:paddingLeft">@dimen/grid_item_footer_padding</item>
+        <item name="android:paddingStart">@dimen/grid_item_footer_padding</item>
+        <item name="android:paddingRight">@dimen/grid_item_footer_padding</item>
+        <item name="android:paddingEnd">@dimen/grid_item_footer_padding</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:background">@color/blue_grey_600</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="RecipeIngredientLayoutStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:singleLine">false</item>
+        <item name="android:layout_margin">@dimen/ingredient_view_margin</item>
+        <item name="android:paddingTop">@dimen/ingredient_view_top_padding</item>
+        <item name="android:paddingBottom">@dimen/ingredient_view_bottom_padding</item>
+        <item name="android:paddingLeft">@dimen/ingredient_view_horizontal_padding</item>
+        <item name="android:paddingStart">@dimen/ingredient_view_horizontal_padding</item>
+        <item name="android:paddingRight">@dimen/ingredient_view_horizontal_padding</item>
+        <item name="android:paddingEnd">@dimen/ingredient_view_horizontal_padding</item>
+        <item name="android:background">@color/deep_orange_900</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="RecipeIngredientLabelViewStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Body2</item>
+    </style>
+
+    <style name="RecipeStepListViewStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:scrollbars">vertical</item>
+        <item name="android:paddingTop">@dimen/step_list_top_padding</item>
+    </style>
+
+    <style name="RecipeStepLayoutStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:background">@color/lime_900</item>
+        <item name="android:layout_margin">@dimen/step_list_margin</item>
+        <item name="android:paddingTop">@dimen/step_list_view_top_padding</item>
+        <item name="android:paddingBottom">@dimen/step_list_view_bottom_padding</item>
+        <item name="android:paddingLeft">@dimen/step_list_view_horizontal_padding</item>
+        <item name="android:paddingRight">@dimen/step_list_view_horizontal_padding</item>
+        <item name="android:paddingStart">@dimen/step_list_view_horizontal_padding</item>
+        <item name="android:paddingEnd">@dimen/step_list_view_horizontal_padding</item>
+    </style>
+
+    <style name="RecipeStepItemViewStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/step_list_item_height</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingLeft">@dimen/step_list_item_horizontal_padding</item>
+        <item name="android:paddingStart">@dimen/step_list_item_horizontal_padding</item>
+        <item name="android:paddingEnd">@dimen/step_list_item_horizontal_padding</item>
+        <item name="android:paddingRight">@dimen/step_list_item_horizontal_padding</item>
+        <item name="android:textColor">@drawable/recipe_step_item_textcolor_selector</item>
+        <item name="android:background">@drawable/recipe_step_item_background_selector</item>
+    </style>
+
+    <style name="RecipeStepTitleViewStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/step_title_top_margin</item>
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Title</item>
+    </style>
+
+    <style name="RecipeStepNavButtonStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">@dimen/step_detail_margin</item>
+    </style>
+
+    <style name="RecipeStepDetailDescriptionViewStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/step_detail_margin</item>
+        <item name="android:layout_marginLeft">@dimen/step_detail_margin</item>
+        <item name="android:layout_marginRight">@dimen/step_detail_margin</item>
+        <item name="android:layout_marginStart">@dimen/step_detail_margin</item>
+        <item name="android:layout_marginEnd">@dimen/step_detail_margin</item>
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Subhead</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="RecipeStepDetailFullDescriptionViewStyle" parent="RecipeStepDetailDescriptionViewStyle">
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Body1</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:singleLine">false</item>
+        <item name="android:scrollbars">vertical</item>
+    </style>
+
+    <style name="RecipeThumbnailImageViewStyle" parent="RecipeImageViewStyle">
+        <item name="android:layout_margin">@dimen/thumbnail_margin</item>
+    </style>
+
+    <style name="RecipeWidgetConfigDialogStyle" parent="Theme.AppCompat.Light">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowBackground">@color/orange_100</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:windowCloseOnTouchOutside">true</item>
+    </style>
+
+</resources>

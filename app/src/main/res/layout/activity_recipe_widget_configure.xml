@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="@dimen/widget_config_window_width"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    tools:context=".ui.RecipeAppWidgetConfigureActivity">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/widgetRecipeListView"
+        style="@style/RecipeListViewStyle"/>
+
+    <TextView
+        android:id="@+id/widgetErrorMessageTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/load_data_error_message" />
+
+</RelativeLayout>

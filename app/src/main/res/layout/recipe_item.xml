@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/recipeImageView"
+        style="@style/RecipeImageViewStyle"
+        android:contentDescription="@string/recipe"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/recipeItemFooterTextView"
+        style="@style/RecipeItemFooterStyle"
+        app:layout_constraintBottom_toBottomOf="@+id/recipeImageView"
+        app:layout_constraintStart_toStartOf="@+id/recipeImageView"
+        app:layout_constraintEnd_toEndOf="@+id/recipeImageView" />
+
+</android.support.constraint.ConstraintLayout>

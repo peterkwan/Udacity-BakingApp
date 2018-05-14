@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.RecipeStepFragment">
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.6"/>
+
+    <ImageView
+        android:id="@+id/navBeforeImageView"
+        style="@style/RecipeStepNavButtonStyle"
+        android:contentDescription="@string/previous_step"
+        android:src="@drawable/ic_navigate_before"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/stepDetailTitleView"
+        style="@style/RecipeStepTitleViewStyle"
+        app:layout_constraintStart_toEndOf="@+id/navBeforeImageView"
+        app:layout_constraintEnd_toStartOf="@+id/navNextImageView"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/navNextImageView"
+        style="@style/RecipeStepNavButtonStyle"
+        android:src="@drawable/ic_navigate_next"
+        android:contentDescription="@string/next_step"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- Exo Player -->
+    <com.google.android.exoplayer2.ui.PlayerView
+        android:id="@+id/playerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/exoplayer_top_margin"
+        android:background="@android:color/black"
+        app:layout_constraintTop_toBottomOf="@id/stepDetailTitleView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/guideline" />
+
+    <ImageView
+        android:id="@+id/thumbnailImageView"
+        style="@style/RecipeThumbnailImageViewStyle"
+        android:contentDescription="@string/app_name"
+        app:layout_constraintTop_toBottomOf="@id/stepDetailTitleView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/guideline"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/step_detail_margin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/guideline">
+
+        <TextView
+            android:id="@+id/stepDetailShortDescriptionView"
+            style="@style/RecipeStepDetailDescriptionViewStyle"/>
+
+        <TextView
+            android:id="@+id/stepDetailFullDescriptionView"
+            style="@style/RecipeStepDetailFullDescriptionViewStyle"
+            android:layout_below="@+id/stepDetailShortDescriptionView"/>
+
+    </RelativeLayout>
+
+</android.support.constraint.ConstraintLayout>

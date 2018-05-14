@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+    android:configure="org.peterkwan.udacity.bakingapp.ui.RecipeAppWidgetConfigureActivity"
+    android:initialKeyguardLayout="@layout/recipe_ingredients"
+    android:initialLayout="@layout/recipe_ingredients"
+    android:minHeight="110dp"
+    android:minWidth="250dp"
+    android:previewImage="@drawable/ic_launcher_foreground"
+    android:resizeMode="horizontal|vertical"
+    android:updatePeriodMillis="86400000"
+    android:widgetCategory="home_screen|keyguard"/>

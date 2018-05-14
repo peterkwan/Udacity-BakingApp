@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="grid_view_vertical_padding">4dp</dimen>
+    <dimen name="grid_view_horizontal_padding">4dp</dimen>
+    <dimen name="grid_item_spacing">0.5dp</dimen>
+    <dimen name="grid_item_footer_height">48dp</dimen>
+    <dimen name="grid_item_footer_padding">16dp</dimen>
+
+    <dimen name="ingredient_view_top_padding">16dp</dimen>
+    <dimen name="ingredient_view_bottom_padding">24dp</dimen>
+    <dimen name="ingredient_view_horizontal_padding">16dp</dimen>
+    <dimen name="ingredient_view_margin">16dp</dimen>
+
+    <dimen name="step_list_margin">16dp</dimen>
+    <dimen name="step_list_view_top_padding">16dp</dimen>
+    <dimen name="step_list_view_bottom_padding">16dp</dimen>
+    <dimen name="step_list_view_horizontal_padding">16dp</dimen>
+    <dimen name="step_list_top_padding">8dp</dimen>
+
+    <dimen name="step_list_item_height">48dp</dimen>
+    <dimen name="step_list_item_horizontal_padding">16dp</dimen>
+
+    <dimen name="step_detail_margin">16dp</dimen>
+    <dimen name="step_title_top_margin">12dp</dimen>
+    <dimen name="exoplayer_top_margin">16dp</dimen>
+    <dimen name="thumbnail_margin">16dp</dimen>
+
+    <dimen name="widget_config_window_width">300dp</dimen>
+    <dimen name="widget_grid_view_horizontal_padding">4dp</dimen>
+    <dimen name="widget_grid_item_spacing">1dp</dimen>
+
+</resources>

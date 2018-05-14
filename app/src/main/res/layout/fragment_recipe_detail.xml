@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.RecipeDetailFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <include
+                android:id="@+id/ingredientLayout"
+                layout="@layout/recipe_ingredients"
+                style="@style/RecipeIngredientLayoutStyle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <RelativeLayout
+                style="@style/RecipeStepLayoutStyle"
+                app:layout_constraintTop_toBottomOf="@+id/ingredientLayout"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <TextView
+                    android:id="@+id/methodLabelView"
+                    style="@style/RecipeIngredientLabelViewStyle"
+                    android:text="@string/method"/>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/stepListView"
+                    style="@style/RecipeStepListViewStyle"
+                    android:layout_below="@+id/methodLabelView"
+                    app:layoutManager="android.support.v7.widget.LinearLayoutManager"/>
+
+            </RelativeLayout>
+
+        </android.support.constraint.ConstraintLayout>
+
+    </ScrollView>
+
+
+
+</android.support.constraint.ConstraintLayout>
