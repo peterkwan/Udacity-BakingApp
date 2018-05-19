@@ -11,6 +11,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.peterkwan.udacity.bakingapp.ui.MainActivity;
 import org.peterkwan.udacity.bakingapp.ui.RecipeDetailActivity;
+import org.peterkwan.udacity.bakingapp.ui.RecipeListFragment;
 import org.peterkwan.udacity.bakingapp.utils.RecyclerViewMatcher;
 
 import static android.support.test.espresso.Espresso.onView;
@@ -103,10 +104,12 @@ public class MainActivityTest {
 
     @Test
     public void testNetworkFailure() throws Throwable {
+        final RecipeListFragment fragment = (RecipeListFragment) activity.getSupportFragmentManager().getFragments().get(0);
+
         activityTestRule.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                activity.onNetworkFailure();
+                fragment.onNetworkFailure();
             }
         });
 

@@ -2,6 +2,7 @@ package org.peterkwan.udacity.bakingapp.ui;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,7 +44,7 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
 
         String imagePath = recipe.getImagePath();
 
-        if (imagePath == null || imagePath.isEmpty()) {
+        if (TextUtils.isEmpty(imagePath)) {
             Picasso.get()
                     .load(R.drawable.cupcake)
                     .into(holder.imageView);

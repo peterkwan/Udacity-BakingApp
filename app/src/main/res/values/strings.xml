@@ -15,4 +15,5 @@
     <string name="play_video_error_message">Error playing video</string>
     <string name="no_video_error_message">No video available</string>
     <string name="select_recipe">Select Baking Recipe</string>
+
 </resources>

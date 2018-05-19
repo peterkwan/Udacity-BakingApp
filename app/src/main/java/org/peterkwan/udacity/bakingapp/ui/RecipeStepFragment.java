@@ -4,6 +4,7 @@ import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,6 +13,7 @@ import android.support.constraint.Guideline;
 import android.support.v4.app.Fragment;
 import android.support.v4.media.session.MediaSessionCompat;
 import android.support.v4.media.session.PlaybackStateCompat;
+import android.text.TextUtils;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -79,6 +81,7 @@ public class RecipeStepFragment extends Fragment implements PlaybackPreparer {
     private static final String STEP_ID = "stepId";
     private static final String RECIPE_NAME = "recipeName";
     private static final String PLAYBACK_POSITION = "playbackPosition";
+    private static final String PLAYBACK_STATE = "playbackState";
 
     private static final int DEFAULT_STEP_ID = 0;
     private static final float PLAYBACK_SPEED = 1f;
@@ -99,6 +102,7 @@ public class RecipeStepFragment extends Fragment implements PlaybackPreparer {
     private PlaybackStateCompat.Builder stateBuilder;
     private PlaybackStateCompat videoPlaybackState;
     private long playbackPosition;
+    private boolean playbackState;
 
     @BindBool(R.bool.two_pane_layout)
     boolean isTwoPaneLayout;
@@ -155,8 +159,13 @@ public class RecipeStepFragment extends Fragment implements PlaybackPreparer {
                 stepId = args.getInt(STEP_ID);
         }
 
-        if (savedInstanceState != null && savedInstanceState.containsKey(PLAYBACK_POSITION))
-            playbackPosition = savedInstanceState.getLong(PLAYBACK_POSITION);
+        if (savedInstanceState != null) {
+            if (savedInstanceState.containsKey(PLAYBACK_POSITION))
+                playbackPosition = savedInstanceState.getLong(PLAYBACK_POSITION);
+
+            if (savedInstanceState.containsKey(PLAYBACK_STATE))
+                playbackState = savedInstanceState.getBoolean(PLAYBACK_STATE);
+        }
 
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_recipe_step, container, false);
@@ -212,25 +221,26 @@ public class RecipeStepFragment extends Fragment implements PlaybackPreparer {
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
-
-        if (mediaSession != null)
-            mediaSession.setActive(false);
-
-        releasePlayer();
+        player = null;
     }
 
     @Override
     public void onPause() {
         super.onPause();
 
-        if (player != null)
-            player.setPlayWhenReady(false);
+        if (Util.SDK_INT <= Build.VERSION_CODES.M) {
+            if (mediaSession != null)
+                mediaSession.setActive(false);
+            releasePlayer();
+        }
     }
 
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
-        if (player != null)
+        if (player != null) {
             outState.putLong(PLAYBACK_POSITION, player.getCurrentPosition());
+            outState.putBoolean(PLAYBACK_STATE, player.getPlayWhenReady());
+        }
         super.onSaveInstanceState(outState);
     }
 
@@ -275,7 +285,7 @@ public class RecipeStepFragment extends Fragment implements PlaybackPreparer {
         String videoUrl = recipeStep.getVideoUrl();
         String thumbnailUrl = recipeStep.getThumbnailUrl();
 
-        if (thumbnailUrl != null && !thumbnailUrl.isEmpty()) {
+        if (!TextUtils.isEmpty(thumbnailUrl)) {
             Picasso.get()
                     .load(Uri.parse(thumbnailUrl))
                     .error(R.drawable.broken_icon)
@@ -322,7 +332,6 @@ public class RecipeStepFragment extends Fragment implements PlaybackPreparer {
         if (player != null) {
             player.stop();
             player.release();
-            player = null;
         }
     }
 
@@ -330,21 +339,21 @@ public class RecipeStepFragment extends Fragment implements PlaybackPreparer {
         if (player == null) {
             TrackSelection.Factory trackSelectionFactory = new AdaptiveTrackSelection.Factory(new DefaultBandwidthMeter());
             TrackSelector trackSelector = new DefaultTrackSelector(trackSelectionFactory);
-
             player = ExoPlayerFactory.newSimpleInstance(getContext(), trackSelector);
-            player.seekTo(playbackPosition);
-            player.addListener(new MediaPlayerEventListener());
-            player.setPlayWhenReady(true);
-
-            playerView.setPlayer(player);
-            playerView.setPlaybackPreparer(this);
-
-            exoPlayerErrorMessage.setTextColor(WHITE);
-
-            String userAgent = Util.getUserAgent(context, TAG);
-            MediaSource mediaSource = new ExtractorMediaSource.Factory(new DefaultHttpDataSourceFactory(userAgent)).createMediaSource(videoUri);
-            player.prepare(mediaSource, false, false);
         }
+
+        player.seekTo(playbackPosition);
+        player.setPlayWhenReady(playbackState);
+        player.addListener(new MediaPlayerEventListener());
+
+        playerView.setPlayer(player);
+        playerView.setPlaybackPreparer(this);
+
+        exoPlayerErrorMessage.setTextColor(WHITE);
+
+        String userAgent = Util.getUserAgent(context, TAG);
+        MediaSource mediaSource = new ExtractorMediaSource.Factory(new DefaultHttpDataSourceFactory(userAgent)).createMediaSource(videoUri);
+        player.prepare(mediaSource, playbackPosition != 0, false);
     }
 
     private void initializeMediaSession() {
@@ -379,8 +388,8 @@ public class RecipeStepFragment extends Fragment implements PlaybackPreparer {
     class MediaPlayerEventListener extends Player.DefaultEventListener {
 
         @Override
-        public void onPlayerStateChanged(boolean playWhenReady, int playbackState) {
-            if (playbackState == STATE_READY)
+        public void onPlayerStateChanged(boolean playWhenReady, int state) {
+            if (state == STATE_READY)
                 stateBuilder.setState(playWhenReady ? STATE_PLAYING : STATE_PAUSED, player.getCurrentPosition(), PLAYBACK_SPEED);
             videoPlaybackState = stateBuilder.build();
             mediaSession.setPlaybackState(videoPlaybackState);

@@ -6,7 +6,6 @@ import android.support.test.InstrumentationRegistry;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -51,13 +50,10 @@ public class RecipeStepActivityTest {
     private boolean isTwoPaneLayout;
     private boolean isLandscapeOrientation;
 
-    @Before
-    public void setUp() {
-        launchActivity(STEP_ID);
-    }
-
     @Test
     public void testFragmentContent() {
+        launchActivity(STEP_ID);
+
         if (!isTwoPaneLayout && !isLandscapeOrientation) {
             onView(withId(TITLE_VIEW_ID)).check(matches(withText("Step " + STEP_ID)));
             onView(withId(SHORT_DESCRIPTION_VIEW_ID)).check(matches(withText("Prep the cookie crust.")));
@@ -67,6 +63,8 @@ public class RecipeStepActivityTest {
 
     @Test
     public void testFragmentComponentVisibility() {
+        launchActivity(STEP_ID);
+
         if (!isTwoPaneLayout && !isLandscapeOrientation) {
             RecipeStepActivity activity = activityTestRule.getActivity();
             isTwoPaneLayout = activity.getResources().getBoolean(R.bool.two_pane_layout);
@@ -82,6 +80,8 @@ public class RecipeStepActivityTest {
 
     @Test
     public void testClickNextStep() {
+        launchActivity(STEP_ID);
+
         if (!isTwoPaneLayout && !isLandscapeOrientation) {
             onView(withId(NAV_NEXT_BUTTON_ID)).perform(click());
 
@@ -95,6 +95,8 @@ public class RecipeStepActivityTest {
 
     @Test
     public void testClickPreviousStep() {
+        launchActivity(STEP_ID);
+
         if (!isTwoPaneLayout && !isLandscapeOrientation) {
             onView(withId(NAV_PREVIOUS_BUTTON_ID)).perform(click());
 
@@ -108,8 +110,9 @@ public class RecipeStepActivityTest {
 
     @Test
     public void testClickGoToFirstStep() {
+        launchActivity(STEP_ID2);
+
         if (!isTwoPaneLayout && !isLandscapeOrientation) {
-            launchActivity(STEP_ID2);
             onView(withId(NAV_PREVIOUS_BUTTON_ID)).perform(click());
 
             onView(withId(NAV_PREVIOUS_BUTTON_ID)).check(matches(withEffectiveVisibility(INVISIBLE)));
@@ -119,8 +122,9 @@ public class RecipeStepActivityTest {
 
     @Test
     public void testClickGoToLastStep() {
+        launchActivity(STEP_ID3);
+
         if (!isTwoPaneLayout && !isLandscapeOrientation) {
-            launchActivity(STEP_ID3);
             onView(withId(NAV_NEXT_BUTTON_ID)).perform(click());
 
             onView(withId(NAV_PREVIOUS_BUTTON_ID)).check(matches(withEffectiveVisibility(VISIBLE)));
@@ -131,15 +135,21 @@ public class RecipeStepActivityTest {
     @Test
     public void testThumbnailVisibility() {
         launchActivity(STEP_ID3);
-        onView(withId(THUMBNAIL_VIEW_ID)).check(matches(withEffectiveVisibility(VISIBLE)));
-        onView(withId(VIDEO_PLAYER_VIEW_ID)).check(matches(withEffectiveVisibility(GONE)));
+
+        if (!isTwoPaneLayout) {
+            onView(withId(THUMBNAIL_VIEW_ID)).check(matches(withEffectiveVisibility(VISIBLE)));
+            onView(withId(VIDEO_PLAYER_VIEW_ID)).check(matches(withEffectiveVisibility(GONE)));
+        }
     }
 
     @Test
     public void testVideoPlayerVisibility() {
         launchActivity(STEP_ID4);
-        onView(withId(THUMBNAIL_VIEW_ID)).check(matches(withEffectiveVisibility(GONE)));
-        onView(withId(VIDEO_PLAYER_VIEW_ID)).check(matches(withEffectiveVisibility(VISIBLE)));
+
+        if (!isTwoPaneLayout) {
+            onView(withId(THUMBNAIL_VIEW_ID)).check(matches(withEffectiveVisibility(GONE)));
+            onView(withId(VIDEO_PLAYER_VIEW_ID)).check(matches(withEffectiveVisibility(VISIBLE)));
+        }
     }
 
     private void launchActivity(int stepId) {
