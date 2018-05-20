@@ -236,6 +236,17 @@ public class RecipeStepFragment extends Fragment implements PlaybackPreparer {
     }
 
     @Override
+    public void onStop() {
+        super.onStop();
+
+        if (Util.SDK_INT > Build.VERSION_CODES.M) {
+            if (mediaSession != null)
+                mediaSession.setActive(false);
+            releasePlayer();
+        }
+    }
+
+    @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         if (player != null) {
             outState.putLong(PLAYBACK_POSITION, player.getCurrentPosition());
@@ -342,10 +353,6 @@ public class RecipeStepFragment extends Fragment implements PlaybackPreparer {
             player = ExoPlayerFactory.newSimpleInstance(getContext(), trackSelector);
         }
 
-        player.seekTo(playbackPosition);
-        player.setPlayWhenReady(playbackState);
-        player.addListener(new MediaPlayerEventListener());
-
         playerView.setPlayer(player);
         playerView.setPlaybackPreparer(this);
 
@@ -354,6 +361,10 @@ public class RecipeStepFragment extends Fragment implements PlaybackPreparer {
         String userAgent = Util.getUserAgent(context, TAG);
         MediaSource mediaSource = new ExtractorMediaSource.Factory(new DefaultHttpDataSourceFactory(userAgent)).createMediaSource(videoUri);
         player.prepare(mediaSource, playbackPosition != 0, false);
+
+        player.seekTo(playbackPosition);
+        player.setPlayWhenReady(playbackState);
+        player.addListener(new MediaPlayerEventListener());
     }
 
     private void initializeMediaSession() {
